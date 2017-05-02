@@ -1,0 +1,40 @@
+{
+  "name": "coin-hunters",
+  "version": "0.0.1",
+  "description": "Service Application Server",
+  "private": true,
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "mocha test/unit.js --debug-brk=5858",
+    "dev": "cross-env NODE_ENV=development && node src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/co3moz/chatter-service"
+  },
+  "keywords": [
+    "service",
+    "application"
+  ],
+  "author": "co3moz",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.4.7",
+    "config": "^1.25.1",
+    "gluon": "^1.7.1",
+    "js-md5": "^0.4.1",
+    "moment-timezone": "^0.5.11",
+    "mysql": "^2.13.0",
+    "node-schedule": "^1.2.0",
+    "redis": "2.6.3",
+    "request": "^2.81.0",
+    "sequelize": "^3.30.1",
+    "socket.io": "^1.7.3"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "cross-env": "^4.0.0",
+    "mocha": "^3.1.2"
+  }
+}

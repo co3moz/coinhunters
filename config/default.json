@@ -1,0 +1,35 @@
+{
+  "port": 8080,
+  "gluon": {
+    "dir": "./src",
+    "auth": {
+      "base": "token",
+      "allow": [
+        "/v1/login",
+        "/v1/register",
+        "/socket.io/*"
+      ]
+    },
+    "publicSource": [
+      "./public",
+      ".."
+    ]
+  },
+  "database": {
+    "dialect": "mysql",
+    "host": "localhost",
+    "user": "root",
+    "password": "",
+    "database": "coinhunters",
+    "timezone": "+3",
+    "dialectOptions": {
+      "multipleStatements": true
+    }
+  },
+  "logger": {
+    "level": "DEBUG",
+    "type": "clusterLogger",
+    "clusterLogger": "WORKER {var.worker_id} {date} {time} {type} {file}:{line} {message}"
+  },
+  "forkAmount": 2
+}
