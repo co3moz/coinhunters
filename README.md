@@ -6,6 +6,9 @@ A Gluon architecture example project. Frontend is pure javascript. Goal is creat
 
 Architecture
 --------------
+- config
+  - default
+  - {environment}
 - src
   - models
     - room
