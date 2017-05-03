@@ -67,3 +67,9 @@ window.waitMultiple = function () {
         args[i](finished.bind(i));
     }
 }
+
+var oldAlert = window.alert;
+
+window.alert = function (message) {
+    document.getElementById('message').innerText = message;
+}
