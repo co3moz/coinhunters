@@ -54,7 +54,7 @@ window.postRequest = function postRequest(url, data, fn) {
 window.waitMultiple = function () {
     var args = Array.from(arguments);
     if (args.length < 2) {
-        throw new Error('provide at least one function with end function')
+        throw new Error('provide atleast one function with end function')
     }
 
     var count = 0;
