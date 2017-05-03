@@ -20,7 +20,7 @@ class Login extends Component {
     }).then(function(response) {
       return response.json()
     }).then(function(json) {
-      console.log('parsed json', json)
+      localStorage.setItem('token',JSON.stringify(json));
     }).catch(function(ex) {
       console.log('parsing failed', ex)
     })
