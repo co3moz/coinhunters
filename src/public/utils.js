@@ -8,6 +8,10 @@ window.setToken = function setToken(newToken) {
     localStorage.setItem('token', JSON.stringify(newToken));
 }
 
+window.getToken = function getToken() {
+    return token;
+}
+
 window.basicRequest = function basicRequest(method, url, data, fn) {
     var xhr = new XMLHttpRequest();
     xhr.open(method, url, true);

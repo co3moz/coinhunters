@@ -15,14 +15,34 @@
     </div>
 </div>
 <script>
-    var room = pageParts[1];
-    getRequest('/v1/room/info/' + room, function (room) {
+    var roomId = pageParts[1];
+    var room;
+    if (!window.socket) {
+        window.socket = io.connect();
+    }
+
+    socket.on('move', function (data) {
+        if (data.room.id == roomId) {
+            getRequest('/v1/room/info/' + roomId, function (r) {
+                room = r;
+                renderRoom();
+            });
+        }
+    })
+
+    getRequest('/v1/room/info/' + roomId, function (r) {
+        room = r;
+        renderRoom();
+    });
+
+    function renderRoom() {
         document.getElementById('odaAdi').innerText = room.name;
         var roomInfo = document.getElementById('roomInfo');
 
-        roomInfo.innerText = "hi"
+        roomInfo.innerHTML = '<h3 style="margin: 0; float:left">' + room.challenger.name + '  ' + room.challengerCoin + (room.status == 'CHALLENGER' ? ' &lt;&lt;&lt;' : '') + ' </h3>' +
+            '<h3 style="margin: 0; float:right">' + (room.status == 'OPPONENT' ? '&gt;&gt;&gt; ' : '') + room.opponentCoin + '  ' + room.opponent.name + '</h3>';
         var roomContent = document.getElementById('roomContent');
-        room.ground.split('').forEach(function (c) {
+        room.ground.split('').forEach(function (c, i) {
 
             if (c == '?') {
                 c = 'dirt';
@@ -31,8 +51,19 @@
             } else if (c == 'C') {
                 c = 'coin'
             }
-            roomContent.innerHTML += '<div class="col-xs-1 col-xs-20-1 ' + c +'">&nbsp;</div>'
+            roomContent.innerHTML += '<div class="col-xs-1 field ' + c + '" fieldId="' + i + '">&nbsp;</div>'
         });
-    });
+
+        roomContent.onclick = function (e) {
+            var fieldId = e.srcElement.getAttribute('fieldId');
+            if (fieldId) {
+                socket.emit('move', {
+                    roomId: roomId,
+                    fieldId: fieldId
+                });
+            }
+
+        }
+    }
 
 </script>

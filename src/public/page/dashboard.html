@@ -38,6 +38,13 @@
             done(users);
         });
     }, function (rooms, users) {
+        window.socket = io.connect();
+
+        socket.emit('alive', {
+            token: getToken().code,
+            userId: getToken().ownerId
+        });
+
         var roomsDOM = document.getElementById('rooms');
         var usersDOM = document.getElementById('users');
 
@@ -77,4 +84,5 @@
 
         }
     });
+
 </script>
