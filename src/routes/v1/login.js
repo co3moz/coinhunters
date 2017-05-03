@@ -14,10 +14,9 @@ router.post('/', control(['email', 'password']), function (req, res) {
   }).then(function (user) {
     if (user == null) return res.unauthorized('invalid credentials');
 
-    req.auth.login(user).then(function (token) {
-        res.ok(token);
-      }
-    );
+    return req.auth.login(user).then(function (token) {
+      res.ok(token);
+    });
   }).catch(res.database);
 });
 

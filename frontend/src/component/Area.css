@@ -1,9 +1,0 @@
-.area{
-    background:#333;
-    width:100vh;
-    height:100vh;
-    float:left;
-    cursor:none;
-    background-image: url("../images/grass.png");
-    background-size: 100vh 100vh; 
-}
