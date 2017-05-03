@@ -19,8 +19,18 @@ router.get('/', function (req, res) {
             ]
         },
         include: [
-            {model: User, as: 'opponent'},
-            {model: User, as: 'challenger'}
+            {model: User, as: 'opponent', attributes: {
+                exclude: [
+                    'email',
+                    'password'
+                ]
+            }},
+            {model: User, as: 'challenger', attributes: {
+                exclude: [
+                    'email',
+                    'password'
+                ]
+            }}
         ]
     }).then(function (room) {
         res.ok(room);

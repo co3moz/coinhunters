@@ -33,17 +33,10 @@ User {
 ```
 
 ```js
-INFO:
-	PICKABLE olan facilitylerin dolapları olabilir. Diğer Facilityler adresin bir parçasıdır.
-	
-GET /v1/facility
-
-Response
-List<Facility> [
-	{
-		"status": "string<enum> (PICKABLE, VISIBLE, {HIDDEN})", // HIDDEN never returns from this service
-		"name": "string",
-		"parentId": "string(Facility)" // Always null
-	}
-]
+GET /v1/room/active "kullanıcının odalarını listeler"
+POST /v1/room/create "oda yaratmak icin"
+GET /v1/room/info/{id} "bir odanın tüm bilgilerini alır, sadece odadaki kişiler alır, odada sadece 2 kişi olabilir, rekabetçi ve rakip şeklinde challenger ve opponent"
+GET /v1/user/online "rastgele online 20 kullanıcı döndür"
+GET /v1/user/random "rastgele 20 kullanıcı döndürür"
+POST /v1/user/random "rastgele 20 kullanıcı döndürür"
 ```
