@@ -1,0 +1,20 @@
+.tile{
+    border-radius: 5px;
+    width:4.8vh;
+    cursor: url("../images/pick.png"), auto;
+    height:4.8vh;
+    margin:0.1vh;
+    float:left;
+    background-image: url("../images/rock.jpg");
+    background-size:4.8vh 4.8vh; 
+}
+
+.empty{
+    background-image: none;
+    background-size:4.8vh 4.8vh; 
+}
+
+.coin{
+    background-image: url("../images/coin.png");
+    background-size: 4.8vh 4.8vh; 
+}

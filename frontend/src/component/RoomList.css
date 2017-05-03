@@ -1,0 +1,57 @@
+.rooms{
+    width:40vh;
+    height:100vh;
+    background: #333;
+    float:left;
+}
+
+.room-title{
+    width:100%;
+    padding: 5px;
+    text-align: center;
+    cursor:pointer;
+    background-color: rgba(255,255,255,0.1);
+}
+
+.room-title:hover{
+    background-color: rgba(0,255,255,0.3);
+}
+
+.room-battle{
+    width:100%;
+    padding: 10px;
+    cursor:pointer;
+    color:white;
+    text-align: center;
+    font-size: 5vh;
+    background-color: rgba(0,0,0,0.3);
+}
+
+.room-battle:hover{
+    background-color: rgba(0,255,255,0.3);
+}
+
+.room-title span{
+    width:100%;
+    display: block;
+    font-weight: bold;
+    font-size: 3vh;
+    color:White;
+}
+
+.room-item{
+    width:100%;
+    background-color: rgba(255,255,255,0.3);
+    border-bottom:1px solid #333;
+    font-size: 2vh;
+    cursor:pointer;
+}
+
+.room-item:hover{
+    background-color: rgba(255,255,255,0.5);
+}
+
+.room-item span{
+    padding:5px;   
+    display: inline-block;
+}
