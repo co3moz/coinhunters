@@ -2,8 +2,11 @@ var container = document.getElementById('container');
 document.body.style.backgroundColor = '#2c3338';
 document.body.style.color = '#606468';
 
+
+var last;
 window.navigatePage = function (page, fn) {
     window.location.hash = page;
+    last = window.location.hash;
 
     var subPages = page.split('/');
 
@@ -20,12 +23,10 @@ window.navigatePage = function (page, fn) {
     });
 }
 
-var last;
 setInterval(function () {
     if (window.location.hash != last) {
         console.log(last, window.location.hash);
         navigatePage(window.location.hash.substring(1));
-        last = window.location.hash;
     }
 }, 250);
 

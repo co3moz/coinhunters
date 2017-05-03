@@ -40,9 +40,11 @@
     }, function (rooms, users) {
         var roomsDOM = document.getElementById('rooms');
         var usersDOM = document.getElementById('users');
+
         rooms.forEach(function (room) {
             roomsDOM.innerHTML += '<a class="list-group-item" href="#room/' + room.id + '">' + room.name + '</a>'
         });
+
         users.forEach(function (user) {
             usersDOM.innerHTML += '<a class="list-group-item pointer userSelect" id="' + user.id + '">' + user.name + '</a>'
         });
@@ -51,7 +53,7 @@
             var element = document.getElementsByClassName('selected')[0];
             if (element) element.classList.remove('selected');
             if (e.srcElement.id) {
-                e.srcElement.classList.add('selected')
+                e.srcElement.classList.add('selected');
             }
         }
 

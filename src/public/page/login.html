@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="col-xs-6">
-                    <p class="lead">Kayıt olmak <span class="text-success">Bedava</span></p>
+                    <p class="lead">Kayıt olmak <span class="text-success">Bedava</span> harbi bak</p>
                     <p><a href="#register" class="btn btn-info btn-block">Kayıt olmak için tıkla</a></p>
                 </div>
             </div>
@@ -41,7 +41,7 @@
             email: email,
             password: password
         }, function(data) {
-            setToken(data.code);
+            setToken(data);
             navigatePage('dashboard');
         })
         

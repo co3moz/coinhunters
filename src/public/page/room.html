@@ -5,7 +5,10 @@
             <h4 class="modal-title" id="odaAdi"></h4>
         </div>
         <div class="modal-body">
-            <div class="row">
+            <div class="row" id="roomInfo">
+
+            </div>
+            <div class="row" id="roomContent" style="text-align: center; padding-left: 5px; padding-right: 5px">
 
             </div>
         </div>
@@ -15,6 +18,21 @@
     var room = pageParts[1];
     getRequest('/v1/room/info/' + room, function (room) {
         document.getElementById('odaAdi').innerText = room.name;
+        var roomInfo = document.getElementById('roomInfo');
+
+        roomInfo.innerText = "hi"
+        var roomContent = document.getElementById('roomContent');
+        room.ground.split('').forEach(function (c) {
+
+            if (c == '?') {
+                c = 'dirt';
+            } else if (c == 'G') {
+                c = 'grass'
+            } else if (c == 'C') {
+                c = 'coin'
+            }
+            roomContent.innerHTML += '<div class="col-xs-1 col-xs-20-1 ' + c +'">&nbsp;</div>'
+        });
     });
 
 </script>

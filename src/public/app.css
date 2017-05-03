@@ -6,3 +6,29 @@
 	background-color: dodgerblue !important;
 	color: white !important;
 }
+
+.col-xs-20-1 {
+	width: 5% !important;
+	padding: 0 !important;
+    cursor: url("images/pick.png"), auto;
+    border: 0.5px solid #1c110f;
+    background-image: url("images/rock.jpg");
+	
+    background-size: 100% 100%; 
+}
+
+.grass {
+    background-image: url("images/grass.png") !important;
+}
+
+.coin {
+    background-image: url("images/coin.png"),  url("images/rock.jpg") !important;
+}
+
+#roomInfo {
+	    width: 100%;
+    background-color: #ffa500;
+    padding: 5px;
+    margin: 0;
+    color: black;
+}

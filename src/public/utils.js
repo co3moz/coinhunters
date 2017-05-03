@@ -1,11 +1,11 @@
 var token = localStorage.getItem('token');
-if (token != null && token.constructor != String) {
-    token = "";
+if (token != null) {
+    token = JSON.parse(token);
 }
 
 window.setToken = function setToken(newToken) {
     token = newToken;
-    localStorage.setItem('token', newToken);
+    localStorage.setItem('token', JSON.stringify(newToken));
 }
 
 window.basicRequest = function basicRequest(method, url, data, fn) {
@@ -13,7 +13,7 @@ window.basicRequest = function basicRequest(method, url, data, fn) {
     xhr.open(method, url, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     if (token) {
-        xhr.setRequestHeader('Token', token);
+        xhr.setRequestHeader('Token', token.code);
     }
     if (data) {
         xhr.send(JSON.stringify(data));
