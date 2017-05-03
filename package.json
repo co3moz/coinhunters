@@ -21,6 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "bluebird": "^3.4.7",
+    "bootstrap": "^3.3.7",
     "config": "^1.25.1",
     "gluon": "^1.7.1",
     "js-md5": "^0.4.1",
