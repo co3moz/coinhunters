@@ -23,10 +23,28 @@
 
     socket.on('move', function (data) {
         if (data.room.id == roomId) {
-            getRequest('/v1/room/info/' + roomId, function (r) {
-                room = r;
-                renderRoom();
-            });
+            var fieldId = data.fieldId;
+            var mt = data.mt;
+
+            var roomInfo = document.getElementById('roomInfo');
+            var room = data.room;
+            if (room.status == 'FINISHED') {
+                roomInfo.innerHTML = '<h3> Kazanan: ' + (room.opponentCoin > room.challengerCoin ? room.opponent.name : (room.challengerCoin > room.opponentCoin ? room.challenger.name : 'kardeşlik')) + '</h3>';
+            } else {
+                roomInfo.innerHTML = '<h3 style="margin: 0; float:left" id="challengerH3">' + room.challenger.name + '  ' + room.challengerCoin + (room.status == 'CHALLENGER' ? ' &lt;&lt;&lt;' : '') + ' </h3>' +
+                    '<h3 style="margin: 0; float:right" id="opponentH3">' + (room.status == 'OPPONENT' ? '&gt;&gt;&gt; ' : '') + room.opponentCoin + '  ' + room.opponent.name + '</h3>';
+            }
+
+            var field = document.querySelector('div[fieldid="' + data.fieldId + '"]');
+            var c;
+            if (data.mt == '?') {
+                c = 'dirt';
+            } else if (data.mt == 'G') {
+                c = 'grass'
+            } else if (data.mt == 'C') {
+                c = 'coin'
+            }
+            field.classList.add(c);
         }
     })
 
@@ -39,8 +57,12 @@
         document.getElementById('odaAdi').innerText = room.name;
         var roomInfo = document.getElementById('roomInfo');
 
-        roomInfo.innerHTML = '<h3 style="margin: 0; float:left">' + room.challenger.name + '  ' + room.challengerCoin + (room.status == 'CHALLENGER' ? ' &lt;&lt;&lt;' : '') + ' </h3>' +
-            '<h3 style="margin: 0; float:right">' + (room.status == 'OPPONENT' ? '&gt;&gt;&gt; ' : '') + room.opponentCoin + '  ' + room.opponent.name + '</h3>';
+        if (room.status == 'FINISHED') {
+            roomInfo.innerHTML = '<h3> Kazanan: ' + (room.opponentCoin > room.challengerCoin ? room.opponent.name : (room.challengerCoin > room.opponentCoin ? room.challenger.name : 'kardeşlik')) + '</h3>';
+        } else {
+            roomInfo.innerHTML = '<h3 style="margin: 0; float:left" id="challengerH3">' + room.challenger.name + '  ' + room.challengerCoin + (room.status == 'CHALLENGER' ? ' &lt;&lt;&lt;' : '') + ' </h3>' +
+                '<h3 style="margin: 0; float:right" id="opponentH3">' + (room.status == 'OPPONENT' ? '&gt;&gt;&gt; ' : '') + room.opponentCoin + '  ' + room.opponent.name + '</h3>';
+        }
         var roomContent = document.getElementById('roomContent');
         roomContent.innerHTML = '';
         room.ground.split('').forEach(function (c, i) {

@@ -40,7 +40,25 @@ io.on('connection', function (socket) {
     Room.find({
       where: {
         id: message.roomId
-      }
+      },
+      include: [
+        {
+          model: User, as: 'opponent', attributes: {
+            exclude: [
+              'email',
+              'password'
+            ]
+          }
+        },
+        {
+          model: User, as: 'challenger', attributes: {
+            exclude: [
+              'email',
+              'password'
+            ]
+          }
+        }
+      ]
     }).then(function (room) {
       if (room.status == 'FINISHED') {
         return;
@@ -84,14 +102,19 @@ io.on('connection', function (socket) {
             item.socket.emit('move', {
               room: {
                 id: room.id,
-                name: room.name
+                name: room.name,
+                status: room.status,
+                opponent: room.opponent,
+                challenger: room.challenger,
+                opponentCoin: room.opponentCoin,
+                challengerCoin: room.challengerCoin
               },
               user: {
                 id: user.id,
                 name: user.name
               },
               fieldId: message.fieldId,
-              data: mt
+              mt: mt
             });
           }
         });
