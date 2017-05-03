@@ -42,6 +42,7 @@
         roomInfo.innerHTML = '<h3 style="margin: 0; float:left">' + room.challenger.name + '  ' + room.challengerCoin + (room.status == 'CHALLENGER' ? ' &lt;&lt;&lt;' : '') + ' </h3>' +
             '<h3 style="margin: 0; float:right">' + (room.status == 'OPPONENT' ? '&gt;&gt;&gt; ' : '') + room.opponentCoin + '  ' + room.opponent.name + '</h3>';
         var roomContent = document.getElementById('roomContent');
+        roomContent.innerHTML = '';
         room.ground.split('').forEach(function (c, i) {
 
             if (c == '?') {

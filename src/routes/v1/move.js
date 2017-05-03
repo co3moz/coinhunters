@@ -68,33 +68,34 @@ io.on('connection', function (socket) {
         }
       }
 
-      room.ground = room.ground.substring(0, message.fieldId) + mt + room.ground.substring(message.fieldId);
+      room.ground = room.ground.substring(0, +message.fieldId) + mt + room.ground.substring(+message.fieldId + 1);
       room.status = room.status == 'CHALLENGER' ? 'OPPONENT' : 'CHALLENGER';
 
       if (room.ground.indexOf('?') == -1) {
         room.status = 'FINISHED';
       }
-      room.save();
+      room.save().then(function () {
+        [room.challengerId, room.opponentId].forEach(function (participant) {
+          var item = live.find(function (obj) {
+            return obj.userId == participant
+          });
 
-      [room.challengerId, room.opponentId].forEach(function (participant) {
-        var item = live.find(function (obj) {
-          return obj.userId == participant
+          if (item != null) {
+            item.socket.emit('move', {
+              room: {
+                id: room.id,
+                name: room.name
+              },
+              user: {
+                id: user.id,
+                name: user.name
+              },
+              fieldId: message.fieldId,
+              data: mt
+            });
+          }
         });
 
-        if (item != null) {
-          item.socket.emit('move', {
-            room: {
-              id: room.id,
-              name: room.name
-            },
-            user: {
-              id: user.id,
-              name: user.name
-            },
-            fieldId: message.fieldId,
-            data: mt
-          });
-        }
       });
     });
   });
