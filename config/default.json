@@ -11,7 +11,7 @@
       ]
     },
     "publicSource": [
-      "./public",
+      "./build",
       ".."
     ]
   },
