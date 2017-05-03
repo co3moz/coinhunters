@@ -1,0 +1,8 @@
+.pointer {
+	cursor: pointer;
+}
+
+.selected {
+	background-color: dodgerblue !important;
+	color: white !important;
+}

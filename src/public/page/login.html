@@ -7,15 +7,15 @@
             <div class="row">
                 <div class="col-xs-6">
                     <div class="well">
-                        <form autocomplete="nofill">
+                        <form autocomplete="nofill" id="loginForm">
                             <div class="form-group">
-                                <label for="username" class="control-label">Kullanıcı adı</label>
-                                <input type="text" class="form-control" id="email" placeholder="example@gmail.com" autocomplete="burayaepostagelecek">
+                                <label for="username" class="control-label">E-posta adresi</label>
+                                <input type="text" class="form-control" id="email" value="doganderya59@gmail.com" placeholder="example@gmail.com" autocomplete="burayaepostagelecek">
                                 <span class="help-block"></span>
                             </div>
                             <div class="form-group">
                                 <label for="password" class="control-label">Şifre</label>
-                                <input type="password" class="form-control" id="password" name="tospaga">
+                                <input type="password" class="form-control" id="password" name="tospaga" value="1">
                                 <span class="help-block"></span>
                             </div>
                             <button type="submit" class="btn btn-success btn-block">Giriş yap</button>
@@ -30,3 +30,20 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('loginForm').onsubmit = function(e) {
+        e.preventDefault();
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+
+        postRequest('/v1/login', {
+            email: email,
+            password: password
+        }, function(data) {
+            setToken(data.code);
+            navigatePage('dashboard');
+        })
+        
+    }
+</script>

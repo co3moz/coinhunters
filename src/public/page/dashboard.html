@@ -1,0 +1,75 @@
+<div id="login-overlay" class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">Coin Hunters</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-xs-5">
+                    <div class="list-group" id="rooms">
+                    </div>
+                </div>
+
+                <div class="col-xs-7">
+                    <div class="form-group">
+                        <label for="name" class="control-label">Oda adı</label>
+                        <input type="text" class="form-control" id="name">
+                    </div>
+
+                    <div class="list-group" id="users">
+                    </div>
+
+                    <button id="olustur" class="btn btn-info btn-block">Oluştur</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        waitMultiple(function (done) {
+            getRequest('/v1/room/active', function (rooms) {
+                done(rooms);
+            });
+        }, function (done) {
+            getRequest('/v1/user/random', function (users) {
+                done(users);
+            });
+        }, function (rooms, users) {
+            var roomsDOM = document.getElementById('rooms');
+            var usersDOM = document.getElementById('users');
+            rooms.forEach(function (room) {
+                roomsDOM.innerHTML += '<a class="list-group-item" href="#room/' + room.id + '">' + room.name + '</a>'
+            });
+            users.forEach(function (user) {
+                usersDOM.innerHTML += '<a class="list-group-item pointer userSelect" id="' + user.id + '">' + user.name + '</a>'
+            });
+
+            usersDOM.onclick = function (e) {
+                var element = document.getElementsByClassName('selected')[0];
+                if (element) element.classList.remove('selected');
+                if (e.srcElement.id) {
+                    e.srcElement.classList.add('selected')
+                }
+            }
+
+            document.getElementById('olustur').onclick = function () {
+                var element = document.getElementsByClassName('selected')[0];
+                if (!element) {
+                    return alert('bir kullanıcı seçmelisiniz!');
+                }
+
+                var oda = document.getElementById('name').value;
+                if (!oda) {
+                    return alert('bir oda adı belirlemelisiniz!');
+                }
+
+                postRequest('/v1/room/create', {
+                    name: oda,
+                    opponentId: element.id,
+                }, function(oda) {
+                    navigatePage('room/' + oda.id);
+                });
+
+            }
+        });
+    </script>
